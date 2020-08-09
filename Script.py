@@ -1,60 +1,88 @@
 "ok this is my first mechanism to save things but what things :O"
 
-# # print("\nWelcome to Book Editor\n")
-# # answer = input(
-# #     "what you want to do:\n\n1. Create new page\n2. Edit exist page\n3. Change number of page\n4. Delete\n")
 
-# if answer == str(1):
-#     print("pamiętam")
+# start = open("Saves.txt", "w+")
 
-test = open("Saves.txt", "w+")
+# for i in range(10):
+#     start.write("This is line %d\n" % (i+1))
 
-for i in range(10):
-    test.write("This is line %d\n" % (i+1))
+# start.close()
 
-test.close()
-
-test2 = open("Saves.txt", "r")
-lol = test2.readlines()
-print(lol)
-
-lista = list(lol)
-dl = int(len(lista))
-print(dl)
-final_list = []
-for i in lista:
-        final_list.append(i.strip())
-
-print(final_list)
-# dict1 = []
-# x = 1
-# while x <= dl:
-#     for line in lista:
-#         dict1.append({x: line})
-#         x = x+1
+print("\nWelcome to Lines Editor\n")
+answer = input(
+    "what you want to do:\n\n1. Create new line\n2. Edit exist line\n3. Delete exist line\n4. Nothing\n")
 
 
-# print(dict1)
-# test2.close()
+if answer == "1":
+    append = open("Saves.txt", "a+")
+    newLine = input("Type your new line: ")
+    append.write(newLine + "\n")
+    append.close()
 
-# dict1[0] = {1: "input"}
-# print(dict1[0])
-# print(dict1)
+if answer == "2":
+    print("Ok so those are your lines: ")
 
-# nowe = []
-# for x in dict1:
-#     for a in x:
-#         nowe.append(x[a])
-#         print(x[a])
+    file1 = open("Saves.txt", "r")
+    existLines = file1.readlines()
 
-# print(nowe)
+    countedLines = (len(existLines))
+    clearedList = []
+    for i in existLines:
+        clearedList.append(i.strip())
 
+    numberList = []
+    x = 1
+    while x <= countedLines:
+        for line in clearedList:
+            numberList.append({x: line})
+            x = x+1
+    print(numberList)
+    file1.close()
+    lineToEdit = int(input("Which line you want to edit?: "))
+    if lineToEdit <= countedLines:
+        editLines = clearedList[(lineToEdit-1)]
+        changedLine = input(
+            "Please type new line insted of previous one :) : ")
+        clearedList[(lineToEdit-1)] = changedLine
+        print(clearedList)
+        file2 = open("Saves.txt", "w+")
+        for i in clearedList:
+            file2.write(i+"\n")
+        file2.close()
 
-# test3 = open("Saves.txt", "w+")
-# for i in nowe:
-#     test3.write(i+"\n")
-# test3.close()
+    else:
+        print("bye")
 
+if answer == "3":
+    print("Ok so those are your lines: ")
 
-# nowe.remove(nowe[7])
-# print(nowe)
+    file1 = open("Saves.txt", "r")
+    existLines = file1.readlines()
+
+    countedLines = (len(existLines))
+    clearedList = []
+    for i in existLines:
+        clearedList.append(i.strip())
+
+    numberList = []
+    x = 1
+    while x <= countedLines:
+        for line in clearedList:
+            numberList.append({x: line})
+            x = x+1
+    print(numberList)
+    file1.close()
+
+    lineToDelete = int(input("Ok so which line you want to delete?: "))
+    if lineToDelete <= countedLines:
+        clearedList.remove(clearedList[(lineToDelete-1)])
+        print(clearedList)
+        file2 = open("Saves.txt", "w+")
+        for i in clearedList:
+            file2.write(i+"\n")
+        file2.close()
+
+    else:
+        print("bye")
+else:
+    None
